@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.ufrn.imd.gerenciadordelivros.R;
 import br.ufrn.imd.gerenciadordelivros.data.LivroDAO;
@@ -19,6 +20,8 @@ public class EditarLivroActivity extends AppCompatActivity {
     private CheckBox chk_emprestado;
     private LivroDAO livroDAO;
 
+    private Livro livro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,15 @@ public class EditarLivroActivity extends AppCompatActivity {
         chk_emprestado = findViewById(R.id.check_emprestado);
 
         livroDAO = LivroDAO.getInstance(this);
+
+        livro = (Livro) getIntent().getSerializableExtra("livro");
+
+        if(livro != null){
+            edi_titulo.setText(livro.getTitulo());
+            edi_autor.setText(livro.getAutor());
+            edi_editora.setText(livro.getEditora());
+            chk_emprestado.setChecked((livro.getEmprestado()==1) ? true : false);
+        }
     }
 
     public void cancelar(View view) {
@@ -45,11 +57,23 @@ public class EditarLivroActivity extends AppCompatActivity {
         String editora = edi_editora.getText().toString();
         int emprestado = (chk_emprestado.isChecked()) ? 1 : 0;
 
-        Livro livro = new Livro(titulo, autor, editora, emprestado);
+        String msg;
 
-        livroDAO.save(livro);
+        if(livro == null){
+            Livro livro = new Livro(titulo, autor, editora, emprestado);
+            livroDAO.save(livro);
+            msg = "Livro adicionado com sucesso! ID= "+livro.getId();
+        }else{
+            livro.setTitulo(titulo);
+            livro.setAutor(autor);
+            livro.setEditora(editora);
+            livro.setEmprestado(emprestado);
 
-        String msg = "Livro adicionado com sucesso! ID="+livro.getId();
+            livroDAO.update(livro);
+            msg = "Livro atualizado com sucesso! ID= "+livro.getId();
+        }
+
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();
 

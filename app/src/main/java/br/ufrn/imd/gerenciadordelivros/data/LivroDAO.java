@@ -92,11 +92,11 @@ public class LivroDAO {
         values.put(LivroContract.Columns.editora,livro.getEditora());
         values.put(LivroContract.Columns.emprestado,livro.getEmprestado());
 
-        bd.update(LivroContract.TABLE_NAME,values,LivroContract.Columns._ID+"?",new String[]{String.valueOf(livro.getId())});
+        bd.update(LivroContract.TABLE_NAME,values,LivroContract.Columns._ID+"=?",new String[]{String.valueOf(livro.getId())});
     }
 
     public void delete(Livro livro){
 
-        bd.delete(LivroContract.TABLE_NAME,LivroContract.Columns._ID+"?",new String[]{String.valueOf(livro.getId())});
+        bd.delete(LivroContract.TABLE_NAME,LivroContract.Columns._ID+"=?",new String[]{String.valueOf(livro.getId())});
     }
 }
