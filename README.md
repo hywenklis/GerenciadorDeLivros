@@ -6,6 +6,6 @@
 
 * Adicionar um livro informando se ele está emprestado ou não, se o livro estiver emprestado, o ícone será cinza e apresentará uma estrela no final do nome.
 
-* Ao clicar no livro podemos edita-ló. O exemplo abaixo mostrará o livro "Android Essencial com Kotlin" mudando para emprestado.
+* Ao clicar no livro podemos edita-ló.
 
-* E por fim exclui um livro.
+* E por fim exclui um livro com um click longo, será apresentado um dialog perguntando se deseja excluir ou não.
