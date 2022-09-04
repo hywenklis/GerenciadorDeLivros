@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ import br.ufrn.imd.gerenciadordelivros.dominio.Livro;
 public class LivroAdapter extends RecyclerView.Adapter<LivroAdapter.LivroHolder>{
 
     private List<Livro> livros;
-    private Context context;
+    private final Context context;
 
-    private OnLivroListener onLivroListener;
+    private final OnLivroListener onLivroListener;
 
     public LivroAdapter(List<Livro> livros, Context context, OnLivroListener onLivroListener) {
         this.livros = livros;
@@ -31,18 +32,17 @@ public class LivroAdapter extends RecyclerView.Adapter<LivroAdapter.LivroHolder>
     }
 
     @NonNull
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public LivroHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
+    public LivroHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_livro,parent,false);
-        LivroHolder livroHolder = new LivroHolder(view, onLivroListener);
 
-        return livroHolder;
+        return new LivroHolder(view, onLivroListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull LivroAdapter.LivroHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull LivroAdapter.LivroHolder holder, int position) {
 
         Livro livro = livros.get(position);
 
@@ -74,7 +74,7 @@ public class LivroAdapter extends RecyclerView.Adapter<LivroAdapter.LivroHolder>
     }
 
 
-    public class LivroHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public static class LivroHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView txtTitulo;
         public TextView txtAutor;

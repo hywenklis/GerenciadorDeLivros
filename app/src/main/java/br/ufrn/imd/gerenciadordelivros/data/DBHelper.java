@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static DBHelper instance;
 
 
-    private static String SQL_CREATE = String.format(
+    private static final String SQL_CREATE = String.format(
         "CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, "+
         "%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL)",
          LivroContract.TABLE_NAME,
@@ -24,8 +24,6 @@ public class DBHelper extends SQLiteOpenHelper {
          LivroContract.Columns.emprestado
 
     );
-
-    private static String SQL_DROP = "DROP TABLE IF EXISTS "+LivroContract.TABLE_NAME;
 
     private DBHelper(Context context){
         super(context,BD_NAME,null,BD_VERSION);
@@ -40,6 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase bd) {
+        String SQL_DROP = "DROP TABLE IF EXISTS " + LivroContract.TABLE_NAME;
         bd.execSQL(SQL_DROP);
         bd.execSQL(SQL_CREATE);
     }

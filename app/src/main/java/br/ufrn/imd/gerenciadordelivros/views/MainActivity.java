@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrn.imd.gerenciadordelivros.R;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements LivroAdapter.OnLi
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_adicionar:
                 Intent intent = new Intent(getApplicationContext(), EditarLivroActivity.class);
                 startActivityForResult(intent,100);

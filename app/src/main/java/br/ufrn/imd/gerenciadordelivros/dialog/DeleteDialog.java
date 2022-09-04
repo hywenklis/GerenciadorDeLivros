@@ -26,7 +26,6 @@ public class DeleteDialog extends DialogFragment implements DialogInterface.OnCl
         if(!(context instanceof OnDeleteListener)){
             throw new RuntimeException("Não é um OnDeleteListener");
         }
-
         this.listener = (OnDeleteListener) context;
     }
 

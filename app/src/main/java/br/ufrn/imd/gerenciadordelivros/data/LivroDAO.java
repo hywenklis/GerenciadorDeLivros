@@ -12,7 +12,7 @@ import br.ufrn.imd.gerenciadordelivros.dominio.Livro;
 
 public class LivroDAO {
 
-    private SQLiteDatabase bd;
+    private final SQLiteDatabase bd;
     private static LivroDAO instance;
 
     private LivroDAO (Context context){
@@ -40,7 +40,7 @@ public class LivroDAO {
         List<Livro> livros = new ArrayList<>();
 
         try(
-        Cursor c = bd.query(LivroContract.TABLE_NAME,
+                Cursor c = bd.query(LivroContract.TABLE_NAME,
                         columns,
                         null,
                         null,
@@ -92,11 +92,20 @@ public class LivroDAO {
         values.put(LivroContract.Columns.editora,livro.getEditora());
         values.put(LivroContract.Columns.emprestado,livro.getEmprestado());
 
-        bd.update(LivroContract.TABLE_NAME,values,LivroContract.Columns._ID+"=?",new String[]{String.valueOf(livro.getId())});
+        bd.update(
+                LivroContract.TABLE_NAME,
+                values,
+                LivroContract.Columns._ID+"=?",
+                new String[]{String.valueOf(livro.getId())}
+        );
     }
 
     public void delete(Livro livro){
 
-        bd.delete(LivroContract.TABLE_NAME,LivroContract.Columns._ID+"=?",new String[]{String.valueOf(livro.getId())});
+        bd.delete(
+                LivroContract.TABLE_NAME,
+                LivroContract.Columns._ID+"=?",
+                new String[]{String.valueOf(livro.getId())}
+        );
     }
 }

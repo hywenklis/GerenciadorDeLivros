@@ -41,7 +41,7 @@ public class EditarLivroActivity extends AppCompatActivity {
             edi_titulo.setText(livro.getTitulo());
             edi_autor.setText(livro.getAutor());
             edi_editora.setText(livro.getEditora());
-            chk_emprestado.setChecked((livro.getEmprestado()==1) ? true : false);
+            chk_emprestado.setChecked(livro.getEmprestado() == 1);
         }
     }
 
@@ -59,11 +59,11 @@ public class EditarLivroActivity extends AppCompatActivity {
 
         String msg;
 
-        if(livro == null){
+        if (livro == null) {
             Livro livro = new Livro(titulo, autor, editora, emprestado);
             livroDAO.save(livro);
             msg = "Livro adicionado com sucesso! ID= "+livro.getId();
-        }else{
+        } else {
             livro.setTitulo(titulo);
             livro.setAutor(autor);
             livro.setEditora(editora);
